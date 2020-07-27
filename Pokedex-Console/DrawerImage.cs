@@ -64,7 +64,9 @@ namespace Pokedex_Console
         static async Task<Bitmap> OptimizeBitmap(Bitmap bitmap)
         {
             var color = bitmap.GetPixel(0, 0);
-
+            
+            // when i write this, I was drunk on a Saturday night 🍻🍺, and...
+            // my original idea was a "Solve, and SolveReverse", no 4 functions.
             Func<Bitmap, Color, int> solveY = (image, color) =>
             {
                 var y = 0;
@@ -154,6 +156,7 @@ namespace Pokedex_Console
             };
 
             //todo make the resource bitmap multi thread safe...
+            //bitmap is not friendly to multi thread
             var tY = Task.Run(() => solveY(bitmap, color));
             var y = await tY;
             var tYReversed = Task.Run(() => solveYReversed(bitmap, color));
